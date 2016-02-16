@@ -54,7 +54,7 @@ I'll begin by creating my **jeffstrap.css** file, and setting up some commented-
 
 /* RESETS */
 
-/* GENERAL STYLES  */
+/* DESIGN STYLES  */
 
 /* COLORS */
 
@@ -82,40 +82,49 @@ html { box-sizing: border-box; }
 
 ```
 
-### General Styles
-General styles are styles that will apply throughout the website, in all sections. Here, we'll set our font choices, as well as the colors for everything in the site. Fonts and colors are pretty much the only design decisions we'd have to make to completely change the look of the styling from one project to the next, and by pulling those rules together at the top of the file, we make it easy to make changes.
-
-First, I'll show you the rules for the General Styles section, then we'll talk about it piece by piece:
+### Design Styles
+Design styles apply throughout the website, across all pages and in all sections; they determine the look of the app. Here, we'll set our font choices, as well as the colors for everything in the site. Fonts and colors are all we need to change to completely alter the styling from one project to the next. By pulling those rules together at the top of the file, we make it easy to make changes.
 
 ```html
-/* GENERAL STYLES */
+/* DESIGN STYLES */
 
 /* Fonts */
 
-body { font-family: 'Open Sans', sans-serif; }
+html { font-family: 'Open Sans', sans-serif; }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: 'Bangers', sans-serif;
 }
 
 /* Colors */
 
 html {
-  background-color: ;
-  color: ;
+  background-color: #888;   /* medium gray */
+  color: #222;              /* dark gray */
 }
 
-body {
-  background-color: ;
-  color: ;
-}
+body { background-color: #ddd; }    /* light gray */
+form { background-color: #bbb; }    /* light medium gray */
 
 header, footer {
-  background-color: ;
-  color: ;
+  background-color: #222;   /* dark gray */
+  color: #ddd;              /* light gray */
 }
 
+a:link,
+a:visited { color: #c00; }  /* darker contrasting color for inactive links */
 
+a:hover,
+a:active { color: #f22; }   /* brighter contrasting color for active links */
 
 ```
 
+#### Fonts
+In the Fonts section, we'll be using two fonts&mdash;one display font and one body font&mdash;and we have only need two rules to assign them throughout the app. The first, declared for the **\<html>** element, assigns our body font (Open Sans, in this case) as the default font for the site. The only elements that will use the display font we've chosen (Bangers, for this app) are the larger heading elements: **\<h1>** down through **\<h4>**. Chances are we won't even need any headings smaller than **\<h4>**, and if we do, we'll just style them as bold-face Open Sans.
+
+We'll be using Google Fonts to serve our chosen fonts; we set that up in the **\<head>** element, which I'll cover below.
+
+#### Colors
+We're using a deliberately simple color scheme here&mdash;four shades of gray for our backgrounds and font colors, and a contrasting red for links, chosen because it stands out well against both light and dark shades of gray. Since the logo **\<h1>** in the header is also a link, it will automatically be styled with the contrasting color, helping it grab the user's attention.
+
+If red is too bold a choice for the contrasting color, try two shades of turquoise, gold, blue, green, or even pink. Just be sure that both shades contrast well with both the light and dark shades in your background. Readability trumps aesthetics for an MVP.
