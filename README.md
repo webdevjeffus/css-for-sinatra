@@ -49,7 +49,7 @@ In this tutorial, we'll actually be employing _three_ CSS files: normalize.css (
 
 I'll begin by creating my **jeffstrap.css** file, and setting up some commented-out section heads to help organize it. Here's how it looks at first:
 
-```html
+```css
 /* jeffstrap.css */
 
 /* RESETS */
@@ -69,7 +69,7 @@ I'll begin by creating my **jeffstrap.css** file, and setting up some commented-
 ### Resets
 In this section, we'll add style rules that fix a few things that browsers do to render pages oddly or inconsistently. This includes setting the document to size block elements, including the header, main, footer and any divs, using border-box sizing, instead of the frustrating default, content-box. We'll also set all margins and padding to 0, since different browsers use different defaults for these properties. When we want margins or padding, we'll add them explicitly.
 
-```html
+```css
 /* RESETS */
 
 html { box-sizing: border-box; }
@@ -85,7 +85,7 @@ html { box-sizing: border-box; }
 ### Design Styles
 Design styles apply throughout the website, across all pages and in all sections; they determine the look of the app. Here, we'll set our font choices, as well as the colors for everything in the site. Fonts and colors are all we need to change to completely alter the styling from one project to the next. By pulling those rules together at the top of the file, we make it easy to make changes.
 
-```html
+```css
 /* DESIGN STYLES */
 
 /* Fonts */
@@ -112,10 +112,18 @@ header, footer {
 }
 
 a:link,
-a:visited { color: #c00; }  /* darker contrasting color for inactive links */
+a:visited {
+  color: #c00;           /* darker contrasting color for inactive links */
+  font-weight: bold;
+  text-decoration: none;
+}
 
 a:hover,
-a:active { color: #f22; }   /* brighter contrasting color for active links */
+a:active {
+  color: #f22;          /* brighter contrasting color for active links */
+  font-weight: bold;
+  text-decoration: none;
+}
 
 ```
 
@@ -128,3 +136,49 @@ We'll be using Google Fonts to serve our chosen fonts; we set that up in the **\
 We're using a deliberately simple color scheme here&mdash;four shades of gray for our backgrounds and font colors, and a contrasting red for links, chosen because it stands out well against both light and dark shades of gray. Since the logo **\<h1>** in the header is also a link, it will automatically be styled with the contrasting color, helping it grab the user's attention.
 
 If red is too bold a choice for the contrasting color, try two shades of turquoise, gold, blue, green, or even pink. Just be sure that both shades contrast well with both the light and dark shades in your background. Readability trumps aesthetics for an MVP.
+
+Note also that we set the font-weight and text-decoration properties for links (**\<a>** tags) here. This means that all links will appear in bold-face type, but without underlines, for a cleaner, more modern look than the default, underlined link style.
+
+### Header Styles
+In this section, we'll set up the rules for the elements in our **\<header>** section. It is here that we see the flexibility of our type-based CSS selectors coming into play.
+
+```css
+header { padding: 1rem; }
+
+header h1 { font-size: 3rem; }
+
+header nav ul { list-style: none; }
+
+header nav li {
+  display: inline-block;
+  padding-left: 1rem;
+  border-left: 3px solid #888;        /* medium gray */
+}
+
+header nav li:first-child { border-left: 0;}
+
+header nav input[type="submit"] {
+  overflow: visible;
+  text-align: center;
+  font-weight: bold;
+  width: auto;
+  border: none;
+  background-color: #222;           /* dark gray */
+  color: #c00;                      /* darker contrasting color */
+}
+
+header nav input[type="submit"]:hover,
+header nav input[type="submit"]:active {
+  color: #f22;                      /* brighter contrasting color */
+}
+```
+
+The first rule just puts 1rem of padding around all four sides of the header, to keep the text from banging against the edges. I prefer rems ("root ems")for most CSS measurements because they scale most smoothly if you make the site responsive. By default, 1rem = 16 pixels; if you want to change that value, just set a font-size property to a value other than 16 pixels in the style for the root element, **\<html>**. If you later change the root em value, then every font-size or element dimension that is sized in rems will scale with the root em.
+
+In the next rule, we specify any and all **\<h1>** elements in the **\<header>** should be rendered at a size of 3rems. Our CSS selector for the rule, "header h1", won't touch **\<h1>**s in any other element of the app&mdash;for example, an **\<h1>** in the **\<main>** element will be displayed at its default size, not at the 3rems specified in this rule.
+
+The rest of the styles in the Header Styles section deal with the components of the header's **\<nav>** element. To be sure that we don't affect list or nav elements elsewhere in the app, we begin each selector with a mention of both the **\<header>** and the **\<nav>** types. The "header nav ul" rule eliminates the bullet points that appear by default on unordered lists. The "header nav li" rule changes the links in the nav bar to appear on a horizontal line, instead of as a vertical list; the "border-left" property establishes a vertical border between each pair of links. The "header nav li:first-child" rule _turns off_ that border to the left of the first link on the nav bar.
+
+The remaining rules, which deal with "header nav input[type="submit"]" elements, are necessary because HTML and Sinatra all but require the "logout" link to be created as a button. Since ending the current session requires a POST route with a hidden "delete" object, it must be created as a single-button form, rather than as a simple link. The last few rules in the Header Styles section are necessary to remove the border and background from the button, so that it looks and behaves like the other links in the nav bar.
+
+If you change the colors for the app in the Design Styles section, be sure to make the corresponding changes to the links here in the header nav bar. For this reason, it's a good idea to include my comments pointing out color properties in your CSS file.
