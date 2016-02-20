@@ -13,7 +13,7 @@ If you read this tutorial from beginning to end, you'll learn how to set up your
 ## Setting up your HTML file
 For this to work, you need to set up your **layout.erb** (or **layout.html.erb**, in Rails) following some basic best-practices for semantic HTML. We'll be relying on HTML semantics to differentiate between tags of the same type in different areas of the page. For example, our stylesheet will handle an **\<h1>** tag differently if it appears in the app's **\<header>** element than if it is in the **\<main>**.
 
-To begin, set up the **\<body>** element in your **layout.erb** as in this example. We'll cover the contents of [the **\<head>** element](#the-html-head-element) later in the tutorial:
+To begin, set up the **\<body>** element in your **layout.erb** as in this example. We'll cover the contents of [the **\<head>** element](#the-html-head-element) later in the tutorial.
 
 ```html
 <!DOCTYPE html>
@@ -51,15 +51,15 @@ The **\<header>** element has a bit more going on, but it's easy enough to under
 
 We'll set up the header so that the logo displays at the left edge, and the nav links appear lined up on the right. To make this happen, we'll put the links inside list items (**\<li>**), which are included in a single unordered list (**\<ul>**). The list is held within a semantic **\<nav>** element, so we can select it easily for styling.
 
-We'll loop back around and cover the **\<head>** element in your layout.erb file after we've talked about the contents of the CSS file.
+Again, we'll loop back around and cover [the **\<head>** element](#the-html-head-element) of your **layout.erb** file after we've talked about the contents of the CSS file.
 
 ## Creating the CSS file
-In this tutorial, we'll actually be employing _three_ CSS files: normalize.css (more on this in the **\<head>** section, below); application.css (where you'll put any specific styling for this particular app; again, more in the **\<head>** session); and this type-based stylesheet, which you can name anything you like, so long as it's distinctive. My version was named "jeffstrap.css" by my DBC classmate, Jon Chen, so I'll use that name for the rest of this how-to.
+In this tutorial, we'll actually be employing _three_ CSS files: **normalize.css** (more on this in [the **\<head>** element](#the-html-head-element), below); **application.css** (where you'll put any specific styling for this particular app; again, more in the **\<head>** session); and this type-based stylesheet, which I'll call **drop-in.css**.
 
-I'll begin by creating my **jeffstrap.css** file, and setting up some commented-out section heads to help organize it. Here's how it looks at first:
+I'll begin by creating and saving a new **drop-in.css** file, and setting up some commented-out section heads to help organize it. Here's how it looks at first:
 
 ```css
-/* jeffstrap.css */
+/* drop-in.css */
 
 /* RESETS */
 
@@ -74,7 +74,7 @@ I'll begin by creating my **jeffstrap.css** file, and setting up some commented-
 ```
 
 ### Resets
-In this section, we'll add style rules that fix a few ways that different browsers render pages oddly or inconsistently. This includes setting the document to size block elements, including the header, main, footer and any divs, using **border-box** sizing, instead of the frustrating default, content-box. We'll also set all **margins** and **padding** to 0, since different browsers use different defaults for these properties. When we want margins or padding, we'll add them explicitly.
+In this section, we'll add style rules that simplify various browsers' default element-rendering, to make styling more designer-friendly. This includes setting the document to size all block elements, including the header, main, footer and any divs, using **border-box** sizing, instead of the frustrating default, **content-box**. We'll also set all **margins** and **padding** to 0, since different browsers use different defaults for these properties. When we want margins or padding, we'll add them explicitly, so we get what we're expecting.
 
 ```css
 /* RESETS */
@@ -99,9 +99,9 @@ h1, h2, h3, h4, h5, h6, p {
 
 ```
 
-In the **body** rule, we first set the left and right **margin** to **auto**, so that the app content will be centered on the page. We'll also set **min-width** and **max-width** values to keep our page within a range in which our styling works. If you want a fully-responsive site, you'll need to add media queries&mdash;but that's a separate talk.
+In the **body** rule, we first set the left and right **margin** to **auto**, so that the app content will be centered on the page. We'll also set **min-width** and **max-width** values to keep our page within a range in which our styling works. If you want a fully-responsive site, you'll need to add media queries&mdash;but that's a separate tutorial.
 
-Finally, we'll add a bottom margin of 0.5rem to our headers and paragraphs, to put just a bit of vertical whitespace between elements on the page. (I'll talk more about rems in section on header styles, below.)
+Finally, we'll add a bottom margin of 0.5rem to our headers and paragraphs, to put just a bit of vertical whitespace between elements on the page. (I'll talk more about rems in the ["Header Styles"](#header-styles) section, below.)
 
 
 ### Design Styles
@@ -120,7 +120,7 @@ h1, h2, h3, h4 {
 ```
 
 #### Fonts
-In the Fonts section, we'll be using two fonts&mdash;one display font and one body font&mdash;and we have only need two rules to assign them throughout the app. The first, declared for the **\<html>** element, assigns our body font (Open Sans, in this case) as the default font for the site. The only elements that will use the display font we've chosen (Bangers, for this app) are the larger heading elements: **\<h1>** down through **\<h4>**. Chances are we won't even need any headings smaller than **\<h4>**, and if we do, we'll just style them as bold-face Open Sans.
+In the Fonts section, we'll be specifying two fonts&mdash;one display font and one body font&mdash;and we have only need two rules to assign them throughout the app. The first rule, declared for the **\<html>** element, assigns our body font (Open Sans, in this case) as the default font for the site. The only elements that will use the display font we've chosen (Bangers, for this app) are the larger heading elements: **\<h1>** down through **\<h4>**. Chances are we won't even need any headings smaller than **\<h4>**, and if we do, we'll just leave them as bold-face Open Sans.
 
 We'll be using Google Fonts to serve our chosen fonts; we set that up in the **\<head>** element, which I'll cover below.
 
@@ -145,9 +145,9 @@ main {
 ```
 
 #### Colors
-We're using a deliberately simple color scheme here&mdash;four shades of gray for our backgrounds and font colors, and a red for links which contrasts well with both light and dark shades of gray. Even so, there are several CSS rules that need to include color properties, so this section _looks_ kind of long. That's because I've moved _all_ the rules which specify color to this section, for ease of maintenance. This probably isn't how you'd set up a stylesheet for the production version, but it makes this quick-and-dirty stylesheet easier to modify.
+We're using a deliberately simple color scheme here&mdash;four shades of gray for our backgrounds and font colors, and two tones of red for links, which contrasts well with both light and dark shades of gray. Even so, there are several CSS rules that need to include color properties, so this section _looks_ kind of long. That's because I've moved _all_ the rules which specify color to this section, for ease of maintenance. This probably isn't how you'd set up a stylesheet for the production version, but it makes this drop-in stylesheet easier to customize.
 
-The **html** and **body** rules set up the background-color and font color for the site. The **html** background is a medium shade that contrasts with both the dark color of the **header** and **footer**, and the light shade in the **main** element. The **body** rule assigns a near-black gray as the background, and a near-white gray as the font color. These colors will appear in everything _except_ the **\<main>** element, which is to say the **\<header>** and **\<footer>** elements. I've added the **header nav input[type="submit"]** selector to the **body** rule, since we will want the background color for the "Logout" button on our nav bar to match the surrounding header. More on the "Logout" button in the "Header Styles" section, below.
+The **html** and **body** rules set up the background-color and font color for the site. The **html** background is a medium shade that contrasts with both the dark color of the **header** and **footer**, and the light shade in the **main** element. The **body** rule assigns a near-black gray as the background, and a near-white gray as the font color. These colors will appear in everything _except_ the **\<main>** element, which is to say the **\<header>** and **\<footer>** elements. I've added the **header nav input[type="submit"]** selector to the **body** rule, since we will want the background color for the "Logout" button on our nav bar to match the surrounding header. More on the "Logout" button in the ["Header Styles"](#header-styles) section, below.
 
 The **main** rule sets the light background and dark font color for the **\<main>** element, which includes everything _except_ the **header** and **footer** of the app.
 
@@ -176,17 +176,17 @@ header nav li {
 main table,
 main th,
 main td {
-  border: 1px solid #222;         /* match body background-color */
-  background-color: #eee;         /* lighter than main background-color */
+  border: 1px solid #222;   /* border should match body background-color */
+  background-color: #eee;   /* even lighter than main background-color */
 }
 
 ```
 
 The next two rules, which start with **a:link** and **a:hover**, style the links throughout the page. The first rule, for inactive links, assigns a rich, dark red which contrasts nicely with both the light and dark backgrounds in the site. This rule also sets link text to bold, with no underline; these properties are inherited by active links as well. The second link rule highlights active links a vivid red, which is noticeably brighter than the dark red of the inactive links. The other selectors in these rules, which include **input[type="submit"]**, style the "Logout" button to use the same colors as other links.
 
-Since the logo **\<h1>** in the header is also a link, it will automatically be styled with the contrasting color, helping it grab the user's attention. If red is too bold a choice for the contrasting color, try two shades of turquoise, gold, blue, green, or even pink. Just be sure that both shades contrast well with both the light and dark shades in your background. Readability trumps aesthetics for an MVP.
+Since the logo **\<h1>** in the header is also a link, it will automatically be styled with the red link color, helping it grab the user's attention. If red is too bold a choice for your contrasting color, try two shades of turquoise, gold, blue, green, or even pink. Just be sure that both shades contrast well with both the light and dark shades in your background. Readability trumps aesthetics for an MVP.
 
-The last rule in the "Colors" section assigns the colors for any tables that are included in the **\<main>** element. The table borders should be the same color as the **background-color** of the **body**; the background-color for the table elements should be a shade lighter than the **\<main>** background, so that it stands out on the page.
+The last rule in the "Colors" section assigns the colors for any tables that are included in the **\<main>** element. The table borders should be the same color as the **background-color** of the **body**; the background-color for the table elements should be a shade lighter than the **\<main>** background, so the table stands out on the page.
 
 ### Header Styles
 In this section, we'll set up the rules for the elements in our **\<header>** section. It is here that we see the flexibility of our type-based CSS selectors coming into play.
@@ -207,7 +207,6 @@ header nav ul {
 header nav li {
   display: inline-block;
   padding-left: 1rem;
-  border-left: 3px solid #888;        /* medium gray */
 }
 
 header nav li:first-child { border-left: 0;}
@@ -219,19 +218,18 @@ header nav input[type="submit"] {
   width: auto;
   border: none;
 }
-
 ```
 
 #### header
-The general **header** rule just puts 1rem of padding around all four sides of the header, to keep the text from banging against the edges. I prefer rems ("root ems") for most CSS measurements because they scale most smoothly if you make the site responsive. By default, 1rem = 16 pixels; if you want to change that value, just set a **font-size** property to some value other than 16 pixels in the style for the root element, **\<html>**. If you later change the root em value, then every font-size or element dimension that is sized in rems will scale with the root em.
+The general **header** rule just puts 1rem of padding around all four sides of the header, to keep the text from banging against the edges. I prefer rems ("root ems") for most CSS measurements because they scale smoothly if you make the site responsive. By default, 1rem = 16 pixels; if you want to change that value, just set a **font-size** property to some value other than 16 pixels in the style for the root element, **\<html>**. If you later change the root em value, then every font-size or element dimension that is sized in rems will scale with the root em.
 
 #### header h1
-In the **header h1** rule, we specify any and all **\<h1>** elements in the **\<header>** should be rendered at a size of 3rems. Our CSS selector for the rule, "header h1", won't touch **\<h1>**s in any other element of the app&mdash;for example, an **\<h1>** in the **\<main>** element will be displayed at its default size, not at the 3rems specified in this rule. We also set the **header h1** to **float: left**, so that it displays against the left margin of the header section.
+In the **header h1** rule, we specify that any and all **\<h1>** elements in the **\<header>** should be rendered at a size of 3rems. Our CSS selector for the rule, "header h1", won't touch **\<h1>**s in any other element of the app&mdash;for example, an **\<h1>** in the **\<main>** element will be displayed at its default size, not at the 3rems specified in this rule. We also set the **header h1** to **float: left**, so that it displays against the left margin of the header section.
 
 #### header nav
-The rest of the styles in the Header Styles section deal with the components of the header's **\<nav>** element. To be sure that we don't affect list or nav elements elsewhere in the app, we begin each selector with a mention of both the **\<header>** and the **\<nav>** types. The **header nav ul** rule eliminates the bullet points that appear by default on unordered lists.
+The rest of the styles in the "Header Styles" section deal with the components of the header's **\<nav>** element. To be sure that we don't affect list or nav elements elsewhere in the app, we begin each selector with a mention of both the **\<header>** and the **\<nav>** types. The **header nav ul** rule eliminates the bullet points that appear by default on unordered lists.
 
-In the **header nav li** rule, **display: inline-block;** changes the links in the nav bar to appear on a horizontal line, instead of as a vertical list. The "border-left" property establishes a vertical border between each pair of links, and the **header nav li:first-child** rule _turns off_ that border for the first link on the nav bar.
+In the **header nav li** rule, **display: inline-block;** changes the links in the nav bar to appear on a horizontal row, instead of a vertical list. The "border-left" property establishes a vertical border between each pair of links, and the **header nav li:first-child** rule _turns off_ that border for the first link on the nav bar.
 
 #### header nav input[type="submit"]
 The last rule in this section, which styles **header nav input[type="submit"]** elements, is necessary because HTML and Sinatra all but _require_ the "logout" link to be created as a button. Since ending the current session requires a POST route with a hidden input to carry the "delete" action, it is usually created as a single-button form, rather than as a simple link. This rule removes the border and background from the button, so that it looks and behaves like the other links in the nav bar; recall that we set the colors for this input in the "Colors" section, above.
@@ -283,25 +281,27 @@ main input[type="submit"] { width: 12rem; }
 ```
 
 #### main
-The padding in the **main** rule just pushes the text in from the edges of the **main** element a little bit; we use rems instead of pixels here so that the width of the padding scales automatically with the fonts. The **clear: both** property is necessary to clear out the floats we used in the header; again, this isn't how we'd do it in the production version of our app, but it works fine for this quick-and-dirty stylesheet.
+The padding in the **main** rule just pushes the text in from the edges of the **main** element a little bit; we use rems instead of pixels here so that the width of the padding scales automatically with the fonts. The **clear: both** property is necessary to clear out the floats we used in the header; again, this isn't how we'd do it in the production version of our app, but it works fine for this quick-and-dirty, drop-in stylesheet.
 
-Headers, paragraphs and links in the **main** element use the defaults set in the Resets and Design Styles, so we generally don't need to add anything for them here. If you decide to increase the size of your headers from the default&mdash;and you very well might&mdash;do that in the Resets section of this stylesheet.
+Headers, paragraphs and links in the **main** element use the defaults set in the "Resets" and "Design Styles," so we generally don't need to add anything for them here. If you decide to increase the size of your headers from the default&mdash;and you very well might&mdash;do that in the Resets section of the **drop-in.css** stylesheet.
 
 #### Lists: main ul and main ul li
+
 Almost every index view in a Sinatra or Rails app is going to display some sort of list of objects from the data base, but the default presentation of unordered lists is very 1994. To bring our stylesheet into the current century, we'll set **list-style** to **none**, to eliminate the bullets. The **margin** properties are necessary to get the list back into the right spot once we've taken out the bullets. I like to set the font-size for list items to 1.25rem, because these lists tend to be pretty important in our Sinatra apps, and we want them to be prominent.
 
 #### Forms: main input and main textarea
+
 Forms are also very common in Sinatra and Rails apps, but again, the default styling for them is generally pretty ugly and unfriendly. We'll handle this mostly by styling the form input elements.
 
 First, we'll set the **display** property of **main input** elements to **block**, so each one appears on its own line on the page. If you add a label for an input, it will default to **display: inline**, so labels will show up to the left of the text box they identify. If you prefer labels on the line above, you can add the following style rule to your CSS file:
 
 ```css
-main label { display: inline; }
+main label { display: block; }
 ```
 
-The margins and padding we set for **input** and **textarea** elements add a bit of whitespace to the form, while setting the **width** of each to **100%** makes each field wide enough to display most input data without scrolling. Remember that **\<input>** elements display only a single line of text. For this reason, you'll want to use a **\<textarea>** form element for any field where users will be entering more than a few words, such as a blog post or comment.
+The margins and padding we set for **input** and **textarea** elements add a bit of whitespace to the form, while setting the **width** of each to **100%** makes each field wide enough to display most input data without annoying sideways scrolling. Remember that **\<input>** elements display only a single line of text. For this reason, you'll want to use a **\<textarea>** form element for any field where users will be entering more than a few words, such as a blog post or comment.
 
-The **main input[type="submit"]** rule sets **Submit** buttons to 12rem, which is wide enough to display the full text on the button in most cases. If you need more space, just up the rem in this rule. Also, note that since we styled these buttons using **main** along with **input**, this rule does not effect the Submit button that we used to log out the user in the **header nav** element.
+The **main input[type="submit"]** rule sets **Submit** buttons to 12rem wide, which is wide enough to display the full text on the button in most cases. If you need more space, just up the rem value in this rule. Also, note that since we styled these buttons using **main** along with **input**, this rule does not effect the Submit button that we used to log out the user in the **header nav** element.
 
 
 ```css
@@ -311,7 +311,6 @@ main table {
   margin-bottom: 1rem;
   width: 100%;
 }
-
 
 main th,
 main td {
@@ -323,7 +322,7 @@ main td {
 ```
 
 ### Tables
-If your app displays complex user or game data, you'll probably want to show it in a table. The **main table** rule sets the table to fill the main element from side to side, and adds a margin at the bottom for whitespace between the table and the next element. The other rule, for **main th** and **td**, handles individual cells in the table. It set each cell, and therefore each column, to 25% of the width of the table, for a four-column table; if you need more or fewer columns, just change the percentage accordingly. The cells rule also adds a bit of top and bottom padding within the cell, and centers the text within the cell.
+If your app displays complex user or game data, you'll probably want to show it in a table. The **main table** rule sets the table to fill the main element from side to side, and adds a margin at the bottom for whitespace between the table and the next element. The other rule, for **main th** and **td**, handles individual cells in the table. It sets each cell, and therefore each column, to 25% of the width of the table, creating a four-column table; if you need more or fewer columns, just change the percentage accordingly. The cells rule also adds a bit of top and bottom padding within the cell, and centers the text within the cell.
 
 Remember that the background and border colors for tables were set in the "Colors" setion, above.
 
@@ -355,7 +354,7 @@ At the beginning of this tutorial, I showed you how to set up the **\<body>** el
   <link href='https://fonts.googleapis.com/css?family=Bangers|Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/jeffstrap.css">
+  <link rel="stylesheet" href="/css/drop-in.css">
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -367,16 +366,16 @@ At the beginning of this tutorial, I showed you how to set up the **\<body>** el
 
 Our **\<head>** element includes four **\<link>** tags that are essential to the styling of the app, and they need to be included in the order shown to make sure they work properly.
 
-#### Fonts
+#### Font link
 The first link makes a call to [Google's free webfont service](https://www.google.com/fonts), to load our preferred fonts for the app. The link in the example uses Bangers&mdash;a brash, all-caps display font&mdash;for the headlines, and Open Sans&mdash;a clean, simple sans-serif font&mdash;for everything else, including paragraph text. If you decide to change the fonts, just go to Google fonts and select an attractive pair of typefaces; you just need one version of the display font used for headers, but you'll want to select four versions&mdash;normal, italic, bold, and bold italic&mdash;of the body font. Once you've made your choices, Google will provide you with the text for a single link that serves them all up, which you can copy and paste into your **\<head>** element. Be sure to delete the default Google fonts link, if you're changing the font choices.
 
-#### Stylesheets
+#### Stylesheet links
 You're probably going to need three CSS stylesheets. The first of these is **normalize.css**, which smooths out the differences in how various browsers render web pages; download and include [the latest version of **normalize**](https://necolas.github.io/normalize.css/).
 
-The next link calls the Sinatra-styling CSS file you created in this tutorial. I call my version **jeffscape.css**; you can call yours anything you like. The final stylesheet you should link is **application.css**, which includes any style rules you've created specifically for the app you're working on. This is where you'd put any rules you needed to handle special cases in this particular app, most likely using classes as CSS selectors. As a general rule of thumb, if you needed a class to style an element, put it in **application.css**; if you used HTML tags as selectors, it goes in your version of the reusable, generic Sinatra-app-styling sheet.
+The next link calls the Sinatra-styling CSS file you created in this tutorial, **drop-in.css**. The final stylesheet you should link in is **application.css**, which includes any style rules you've created specifically for the app you're working on. This is where you'd put any rules you needed to handle special cases in this particular app, most likely using classes as CSS selectors. As a general rule of thumb, if you needed a class to style an element, put it in **application.css**; if you used HTML tags as selectors, it goes in your version of **drop-in.css**.
 
 #### Scripts
-The **\<head>** element is also where you link your Javascript libraries and files. In this example, we call for a recent version of **jQuery**, served by Google's CDN (content delivery network), as well as **application.js**, which includes any specific JavaScript needed for this app.
+The **\<head>** element is also where you link to your Javascript libraries and files. In this example, we call for a recent version of **jQuery**, served by Google's CDN (content delivery network), as well as **application.js**, which includes any specific JavaScript you've written for this app.
 
 #### Title
 The text you enter into the **\<title>** element appears on the browser tab that holds your app. Entering your app name here is a subtle but impressive touch, and shows attention to detail.
@@ -387,13 +386,13 @@ Once you have created your drop-in CSS-for-Sinatra stylesheet, you'll want to us
 ### Adding the stylesheet to an existing Sinatra app
 First, you'll need to save your stylesheet to the folder in the app where you keep your stylesheets; in an app based on the Dev-Bootcamp-style Sinatra skeleton, that folder is **/public/css**. Then you simply add a link to the stylesheet in your app's **layout.erb** file (**layout.html.erb** for a Rails app). The link should come _after_ the link to **normalize.css**, but _before_ the link to the app-specific stylesheet, if there is one. You'll also need to insert the Google Fonts link _before_ all the stylesheet links.
 
-Once you've saved the stylesheet in the right folder, and added the necessary links to your **layout** file, fire up your server and open the app in the browser, and marvel at the instant styling goodness!
+Once you've saved drop-in.css in the right folder, and added the necessary links to your **layout** file, fire up your server and open the app in the browser, and marvel at the instant styling goodness!
 
 ### Starting from scratch
-If you're using this drop-in stylesheet from the beginning of your development process, you'll begin by saving this stylesheet, along with the current version of **normalize.css** in the appropriate folder in your app repo. For a DBC-style Sinatra app, that's **/public/css** again.
+If you're using this drop-in stylesheet from the beginning of your development process, you'll begin by saving **drop-in.css**, along with the current version of **normalize.css**, in the appropriate folder in your app repo. Again, for a DBC-style Sinatra app, that's **/public/css**.
 
 Then you'll want to replace the contents of the **layout.erb** file with the **\<body>** and **\<head>** elements shown in the examples, above. Alternately, you can use the **layout.erb** file included in this repo. The **layout** file in this repo assumes you're implementing user authentication and sessions, and includes the HTML for sign-up, login, logout, and user profile links in the nav bar. If you're not using user authentication, just replace the code inside the **\<nav>** element with simple navigation links, as in the code snippet in the example on this page, above.
 
-In the **\<head>** element, be sure you've included a Google Font link to serve your chosen fonts, and stylesheet links to **normalize.css** and your version of the drop-in stylesheet.
+In the **\<head>** element, be sure you've included a Google Font link to serve your chosen fonts, and stylesheet links to **normalize.css** and your version of **drop-in.css**.
 
 
