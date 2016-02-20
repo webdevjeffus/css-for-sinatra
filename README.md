@@ -393,4 +393,12 @@ Then you'll want to replace the contents of the **layout.erb** file with the **\
 
 In the **\<head>** element, be sure you've included a Google Font link to serve your chosen fonts, and stylesheet links to **normalize.css** and your version of **drop-in.css**.
 
+<hr>
 
+#### Licenses
+
+This tutorial is Copyright &copy; 2016 by Jeff George.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Drop-In CSS for Sinatra Tutorial</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="webdevjeffus.github.io/css-for-sinatra" property="cc:attributionName" rel="cc:attributionURL">Jeff George</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+The other files in this repo, **drop-in.css** and **layout.erb**, may be used under the terms of the [MIT License](https://opensource.org/licenses/MIT).
