@@ -13,8 +13,15 @@ This README file contains the main flow of the how-to; read or skim it from top 
 ## Setting up your HTML file
 For this to work, you need to set up your layout.erb (or layout.html.erb, in Rails) following some basic best-practices for semantic HTML. We'll be relying on HTML semantics to differentiate between tags of the same type in different areas of the page. For example, our stylesheet will handle an **\<h1>** tag differently if it appears in the app's **\<header>** element than if it is in the **\<main>**.
 
-When you set up your layout.erb, include the following code in the document's **\<body>** element:
+When you set up your layout.erb, set up the document's **\<body>** element as in this example. We'll cover the contents of the **\<head>** element later in the tutorial:
 ```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Discussed in "The HTML <head> element", below -->
+</head>
+
 <body>
   <header>
     <h1><a href="/">APP NAME</a></h1>
@@ -34,6 +41,7 @@ When you set up your layout.erb, include the following code in the document's **
     <p>FOOTER TEXT</p>
   </footer>
 </body>
+</html>
 ```
 
 The "yield," wrapped in a printing erb tag, will tell Sinatra (or Rails) to render each view inside the **\<main>** element; you don't need to do anything else to this section. The **\<footer>** tag is even less complex&mdash;just drop your own footer text into the **\<p>** element.
@@ -294,30 +302,68 @@ The margins and padding we set for **input** and **textarea** elements add a bit
 
 The **main input[type="submit"]** rule sets **Submit** buttons to 12rem, which is wide enough to display the full text on the button in most cases. If you need more space, just up the rem in this rule. Also, note that since we styled these buttons using **main** along with **input**, this rule does not effect the Submit button that we used to log out the user in the **header nav** element.
 
-### Tables
-If your app displays complex user or game data, you'll probably want to show it in a table. Here are the rules to add to your stylesheet to automatically style a simple table:
 
 ```css
+/* Main Styles, con't. */
+
 main table {
   margin-bottom: 1rem;
-  border: 1px #222 solid;
-  background-color: #fff;
   width: 100%;
 }
 
-main tr:first-child {
-  background-color: #aaa;
-  color: #222;
-}
 
 main th,
 main td {
-  padding: 0.25rem 0;
   width: 25%;
+  padding: 0.25rem 0;
   text-align: center;
   border: 1px solid #222;
 }
 ```
 
-#### main table
-In this rule, we
+### Tables
+If your app displays complex user or game data, you'll probably want to show it in a table. The **main table** rule sets the table to fill the main element from side to side, and adds a margin at the bottom for whitespace between the table and the next element. The other rule, for **main th** and **td**, handles individual cells in the table. It set each cell, and therefore each column, to 25% of the width of the table, for a four-column table; if you need more or fewer columns, just change the percentage accordingly. The cells rule also adds a bit of top and bottom padding within the cell, and centers the text within the cell.
+
+Remember that the background and border colors for tables were set in the "Colors" setion, above.
+
+## Footer Styles
+
+There's just one rule in our footer section:
+
+```css
+/* FOOTER STYLES */
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 1rem;
+}
+```
+
+This rule is intended to style a single line of credits, something like: "Created by Jeff George for Dev Bootcamp Phase 2," or whatever. The rule centers the text, sets it to 80% of the default font size, and adds 1rem of padding to all sides of the footer. If you add **\<a>** tags to the footer text, to link to your Github or website, the stylesheet will apply the standard link color and styling to them, which should look fine if you chose your colors carefully at the top of the stylesheet.
+
+## The HTML <head> element
+
+At the beginning of this tutorial, I showed you how to set up the **\<body>** element of your **layout.erb** file, so that you could use semantic HTML tags as CSS selectors to style the page as intended. In this section, we double back and create the **\<head>** element, with the appropriate stylesheet links so that everything works properly. Here is the content for the **\<head>** element:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link href='https://fonts.googleapis.com/css?family=Bangers|Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/jeffstrap.css">
+  <link rel="stylesheet" href="/css/application.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/application.js"></script>
+
+  <title>App Name</title>
+</head>
+```
+
+
+
+
