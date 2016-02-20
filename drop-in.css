@@ -1,4 +1,4 @@
-/* jeffstrap.css */
+/* drop-in.css */
 
 
 /* RESETS */
@@ -86,13 +86,9 @@ header h1 {
   float: left;
 }
 
-header nav {
-  float: right;
-}
+header nav { float: right; }
 
-header nav ul {
-  list-style: none;
-}
+header nav ul { list-style: none; }
 
 header nav li {
   display: inline-block;
@@ -116,6 +112,8 @@ main {
   clear: both;
 }
 
+/* Lists */
+
 main ul { margin: 0 auto 1.5rem; }
 
 main ul li {
@@ -124,13 +122,18 @@ main ul li {
   font-size: 1.25rem;
 }
 
+/* Forms */
+
 main input {
   display: block;
   margin-bottom: 0.75rem;
   width: 100%;
 }
 
-main input[type="text"] { padding: 0 0.5rem; }
+main input[type="text"],
+main input[type="password"] {
+  padding: 0 0.5rem;
+}
 
 main textarea {
   width: 100%;
@@ -140,6 +143,8 @@ main textarea {
 }
 
 main input[type="submit"] { width: 12rem; }
+
+/* Tables */
 
 main table {
   width: 100%;
