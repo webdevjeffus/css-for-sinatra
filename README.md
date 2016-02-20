@@ -1,6 +1,6 @@
 # Drop-In CSS for Sinatra
 #### How to develop a flexible CSS stylesheet to instantly style any Sinatra-based web app
-(Repo and accompanying talk currently under development)
+This tutorial was prepared to accompany a "lightning-talk" presentation on quickly styling MVP web apps, to be presented to the Phase 2 students at [Dev Bootcamp NYC](devbootcamp.com).
 
 ## What this How-to is, and what it isn't
 The purpose of this how-to is to help you develop a flexible CSS stylesheet that can be dropped into any Sinatra-based web app, instantly applying "good-enough" styling to the entire website. This is accomplished using type-based CSS selectors along with simple semantic HTML structure. When properly executed, the final stylesheet should work on _any_ Sinatra web app, as well as most Rails-based apps, without adding any classes to the HTML, or any additional styling rules to the CSS file.
