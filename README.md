@@ -291,7 +291,7 @@ main textarea {
 }
 
 main input[type="radio"],
-main input[type="checkbox] {
+main input[type="checkbox"] {
   display: inline;
   width: 1.5rem;
 }
