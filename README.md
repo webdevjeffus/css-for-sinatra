@@ -255,28 +255,6 @@ main ul li {
   margin: 0.5rem 0 1rem;
   font-size: 1.25rem;
 }
-
-/* Forms */
-
-main input {
-  display: block;
-  margin-bottom: 0.75rem;
-  width: 100%;
-}
-
-main input[type="text"],
-main input[type="password"] {
-  padding: 0 0.5rem;
-}
-
-main textarea {
-  width: 100%;
-  height: 5rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-}
-
-main input[type="submit"] { width: 12rem; }
 ```
 
 #### main
@@ -287,6 +265,32 @@ Headers, paragraphs and links in the **main** element use the defaults set in th
 #### Lists: main ul and main ul li
 
 Almost every index view in a Sinatra or Rails app is going to display some sort of list of objects from the data base, but the default presentation of unordered lists is very 1994. To bring our stylesheet into the current century, we'll set **list-style** to **none**, to eliminate the bullets. The **margin** properties are necessary to get the list back into the right spot once we've taken out the bullets. I like to set the font-size for list items to 1.25rem, because these lists tend to be pretty important in our Sinatra apps, and we want them to be prominent.
+
+```css
+/* Main Styles, con't. */
+
+/* Forms */
+
+main input {
+  display: block;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+main textarea {
+  width: 100%;
+  height: 5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+main input[type="text"],
+main input[type="password"] {
+  padding: 0 0.5rem;
+}
+
+main input[type="submit"] { width: 12rem; }
+```
 
 #### Forms: main input and main textarea
 
@@ -300,11 +304,15 @@ main label { display: block; }
 
 The margins and padding we set for **input** and **textarea** elements add a bit of whitespace to the form, while setting the **width** of each to **100%** makes each field wide enough to display most input data without annoying sideways scrolling. Remember that **\<input>** elements display only a single line of text. For this reason, you'll want to use a **\<textarea>** form element for any field where users will be entering more than a few words, such as a blog post or comment.
 
+To make sure that radio buttons and checkboxes appear with their labels, we need to add a special rule for those inputs of those types. We'll set them to **display: inline**, with **width: 1.5rem**. (These lines essentially _undo_ for radio buttons and checkboxes the styling we applied to input elements in general a few lines above.)
+
 The **main input[type="submit"]** rule sets **Submit** buttons to 12rem wide, which is wide enough to display the full text on the button in most cases. If you need more space, just up the rem value in this rule. Also, note that since we styled these buttons using **main** along with **input**, this rule does not effect the Submit button that we used to log out the user in the **header nav** element.
 
 
 ```css
 /* Main Styles, con't. */
+
+/* Tables */
 
 main table {
   margin-bottom: 1rem;
