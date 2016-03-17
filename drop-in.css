@@ -133,14 +133,9 @@ main input {
 }
 
 main input[type="text"],
-main input[type="password"] {
+main input[type="password"],
+main input[type="email"] {
   padding: 0 0.5rem;
-}
-
-main input[type="radio"],
-main input[type="checkbox] {
-  display: inline;
-  width: 1.5rem;
 }
 
 main textarea {
@@ -148,6 +143,12 @@ main textarea {
   height: 5rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
+}
+
+main input[type="radio"],
+main input[type="checkbox] {
+  display: inline;
+  width: 1.5rem;
 }
 
 main input[type="submit"] { width: 12rem; }
