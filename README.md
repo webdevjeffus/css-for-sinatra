@@ -277,6 +277,12 @@ main input {
   width: 100%;
 }
 
+main input[type="text"],
+main input[type="password"],
+main input[type="email"] {
+  padding: 0 0.5rem;
+}
+
 main textarea {
   width: 100%;
   height: 5rem;
@@ -284,9 +290,10 @@ main textarea {
   padding: 0.5rem;
 }
 
-main input[type="text"],
-main input[type="password"] {
-  padding: 0 0.5rem;
+main input[type="radio"],
+main input[type="checkbox] {
+  display: inline;
+  width: 1.5rem;
 }
 
 main input[type="submit"] { width: 12rem; }
